@@ -11,10 +11,11 @@ var COLUMN_GAP = 50;
 var TEXT_HEIGHT = 16;
 var CLOUD_BOTTOM = CLOUD_HEIGHT - GAP;
 
-
-var renderCloud = function (ctx, x, y, color) {
-  ctx.fillStyle = color;
-  ctx.fillRect(x, y, CLOUD_WIDTH, CLOUD_HEIGHT);
+var renderRect = function (ctx, x, y, width, height, color) {
+  if (color) {
+    ctx.fillStyle = color;
+  }
+  ctx.fillRect(x, y, width, height);
 };
 
 var getMaxElement = function (array) {
@@ -29,9 +30,13 @@ var getMaxElement = function (array) {
   return maxElement;
 };
 
+var renderText = function (ctx, text, x, y) {
+  ctx.fillText(text, x, y);
+};
+
 window.renderStatistics = function (ctx, names, times) {
-  renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, 'rgba(0, 0, 0, 0.7)');
-  renderCloud(ctx, CLOUD_X, CLOUD_Y, '#fff');
+  renderRect(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, CLOUD_WIDTH, CLOUD_HEIGHT, 'rgba(0, 0, 0, 0.7)');
+  renderRect(ctx, CLOUD_X, CLOUD_Y, CLOUD_WIDTH, CLOUD_HEIGHT, '#fff');
 
   ctx.fillStyle = '#000';
   ctx.font = '16px PT Mono';
@@ -49,10 +54,11 @@ window.renderStatistics = function (ctx, names, times) {
     }
 
     var columnHeight = HISTOGRAM_HEIGHT * Math.floor(times[i]) / maxTime;
+    var horizontalOffset = CLOUD_X + COLUMN_GAP + (COLUMN_WIDTH + COLUMN_GAP) * i;
 
-    ctx.fillText(Math.round(times[i]), CLOUD_X + COLUMN_GAP + (COLUMN_WIDTH + COLUMN_GAP) * i, CLOUD_BOTTOM - TEXT_HEIGHT - columnHeight - TEXT_HEIGHT);
-    ctx.fillRect(CLOUD_X + COLUMN_GAP + (COLUMN_WIDTH + COLUMN_GAP) * i, CLOUD_BOTTOM - TEXT_HEIGHT - columnHeight, COLUMN_WIDTH, columnHeight);
+    renderText(ctx, Math.round(times[i]), horizontalOffset, CLOUD_BOTTOM - TEXT_HEIGHT - columnHeight - TEXT_HEIGHT);
+    renderRect(ctx, horizontalOffset, CLOUD_BOTTOM - TEXT_HEIGHT - columnHeight, COLUMN_WIDTH, columnHeight);
     ctx.fillStyle = '#000';
-    ctx.fillText(names[i], CLOUD_X + COLUMN_GAP + (COLUMN_WIDTH + COLUMN_GAP) * i, CLOUD_BOTTOM);
+    renderText(ctx, names[i], horizontalOffset, CLOUD_BOTTOM);
   }
 };
