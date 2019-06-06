@@ -34,6 +34,10 @@ var renderText = function (ctx, text, x, y) {
   ctx.fillText(text, x, y);
 };
 
+var getRandomBlueColor = function () {
+  return Math.ceil(Math.random() * 255);
+};
+
 window.renderStatistics = function (ctx, names, times) {
   renderRect(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, CLOUD_WIDTH, CLOUD_HEIGHT, 'rgba(0, 0, 0, 0.7)');
   renderRect(ctx, CLOUD_X, CLOUD_Y, CLOUD_WIDTH, CLOUD_HEIGHT, '#fff');
@@ -50,7 +54,7 @@ window.renderStatistics = function (ctx, names, times) {
     if (names[i] === 'Вы') {
       ctx.fillStyle = 'rgba(255, 0, 0, 1)';
     } else {
-      ctx.fillStyle = 'rgba(0,0,' + Math.ceil(Math.random() * 255) + ',1)';
+      ctx.fillStyle = 'rgba(0,0,' + getRandomBlueColor() + ',1)';
     }
 
     var columnHeight = HISTOGRAM_HEIGHT * Math.floor(times[i]) / maxTime;
