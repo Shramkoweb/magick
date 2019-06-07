@@ -10,6 +10,8 @@ var HISTOGRAM_HEIGHT = 150;
 var COLUMN_GAP = 50;
 var TEXT_HEIGHT = 16;
 var CLOUD_BOTTOM = CLOUD_HEIGHT - GAP;
+var TITLE_HORIZONTAL_OFFSET = CLOUD_X + GAP * 3;
+var TITLE_VERTICAL_OFFSET = CLOUD_Y + GAP;
 
 var renderRect = function (ctx, x, y, width, height, color) {
   if (color) {
@@ -46,8 +48,8 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.fillStyle = '#000';
   ctx.font = '16px PT Mono';
   ctx.textBaseline = 'hanging';
-  ctx.fillText('Ура, вы победили!', CLOUD_X + GAP * 3, CLOUD_Y + GAP * 2);
-  ctx.fillText('Список результатов:', CLOUD_X + GAP * 3, CLOUD_Y + GAP * 2 + TEXT_HEIGHT);
+  renderText(ctx, 'Ура, вы победили!', TITLE_HORIZONTAL_OFFSET, TITLE_VERTICAL_OFFSET * 2);
+  renderText(ctx, 'Список результатов:', TITLE_HORIZONTAL_OFFSET, TITLE_VERTICAL_OFFSET * 2 + TEXT_HEIGHT);
 
   var maxTime = getMaxElement(times);
 
@@ -64,7 +66,7 @@ window.renderStatistics = function (ctx, names, times) {
     var horizontalOffset = CLOUD_X + COLUMN_GAP + (COLUMN_WIDTH + COLUMN_GAP) * i;
 
     renderText(ctx, Math.round(times[i]), horizontalOffset, CLOUD_BOTTOM - TEXT_HEIGHT - columnHeight - TEXT_HEIGHT);
-    renderRect(ctx, horizontalOffset, CLOUD_BOTTOM - TEXT_HEIGHT - columnHeight, COLUMN_WIDTH, columnHeight);
+    renderRect(ctx, horizontalOffset, CLOUD_BOTTOM - TEXT_HEIGHT - columnHeight, COLUMN_WIDTH, columnHeight, rectColor());
     ctx.fillStyle = '#000';
     renderText(ctx, names[i], horizontalOffset, CLOUD_BOTTOM);
   }
