@@ -52,11 +52,13 @@ window.renderStatistics = function (ctx, names, times) {
   var maxTime = getMaxElement(times);
 
   for (var i = 0; i < names.length; i++) {
-    if (names[i] === 'Вы') {
-      ctx.fillStyle = 'rgba(255, 0, 0, 1)';
-    } else {
-      ctx.fillStyle = 'rgba(0,0,' + getRandomBlueColor() + ',1)';
-    }
+    var rectColor = function () {
+      if (names[i] === 'Вы') {
+        ctx.fillStyle = 'rgba(255, 0, 0, 1)';
+      } else {
+        ctx.fillStyle = getRandomBlueColor();
+      }
+    };
 
     var columnHeight = HISTOGRAM_HEIGHT * Math.floor(times[i]) / maxTime;
     var horizontalOffset = CLOUD_X + COLUMN_GAP + (COLUMN_WIDTH + COLUMN_GAP) * i;
