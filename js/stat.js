@@ -35,7 +35,8 @@ var renderText = function (ctx, text, x, y) {
 };
 
 var getRandomBlueColor = function () {
-  return Math.ceil(Math.random() * 255);
+  var result = 'hsla(240, 100%, ' + Math.ceil(Math.random() * 100) + '%, 50%)';
+  return result;
 };
 
 window.renderStatistics = function (ctx, names, times) {
