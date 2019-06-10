@@ -16,8 +16,7 @@ var removeHiddenClass = function (element) {
 removeHiddenClass(WIZZARD_SETUP);
 
 var getRandomItemFrom = function (array) { // получаем случайный элемент в переданом масиве
-  var arrayLength = array.length;
-  var randomItem = array[Math.floor(Math.random() * arrayLength)];
+  var randomItem = array[Math.floor(Math.random() * array.length)];
   return randomItem;
 };
 
