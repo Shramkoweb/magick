@@ -16,4 +16,17 @@ var getRandomItemFrom = function (array) { // получаем случайны�
   var arrayLength = array.length;
   var randomItem = array[Math.floor(Math.random() * array.length)];
   return randomItem;
-}
+};
+
+var generateWizards = function name(count) { // генерация переданого кол-ва волшебников
+  var wizards = [];
+  for (var i = 0; i < count; i++) {
+    wizards.push({
+      name: getRandomItemFrom(WIZZARDS_NAMES) + ' ' + getRandomItemFrom(WIZARDS_SURNAMES),
+      coatColor: getRandomItemFrom(WIZZARDS_COAT_COLOR),
+      eyesColor: getRandomItemFrom(WIZARDS_EYES_COLORS)
+    });
+  }
+
+  return wizards;
+};
