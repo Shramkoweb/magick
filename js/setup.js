@@ -15,60 +15,46 @@ var setupOpen = document.querySelector('.setup-open');
 var setupClose = setup.querySelector('.setup-close');
 var userNameInput = setup.querySelector('.setup-user-name');
 
-// Работа с окном диалога 
+// Работа с окном диалога
 
-var onPopupEscPress = function(evt) {
+var onPopupEscPress = function (evt) {
   if (evt.keyCode === ESC_KEYCODE) {
     closePopup();
   }
 };
 
-var openPopup = function() {
+var openPopup = function () {
   setup.classList.remove('hidden');
   document.addEventListener('keydown', onPopupEscPress);
 };
 
-var closePopup = function() {
+var closePopup = function () {
   setup.classList.add('hidden');
   document.removeEventListener('keydown', onPopupEscPress);
 };
 
-setupOpen.addEventListener('click', function() {
+setupOpen.addEventListener('click', function () {
   openPopup();
 });
 
-setupOpen.addEventListener('keydown', function(evt) {
+setupOpen.addEventListener('keydown', function (evt) {
   if (evt.keyCode === ENTER_KEYCODE) {
     openPopup();
   }
 });
 
-setupClose.addEventListener('click', function() {
+setupClose.addEventListener('click', function () {
   closePopup();
 });
 
-setupClose.addEventListener('keydown', function(evt) {
+setupClose.addEventListener('keydown', function (evt) {
   if (evt.keyCode === ENTER_KEYCODE) {
     closePopup();
   }
 });
 
-userNameInput.addEventListener('focus', function() {
+userNameInput.addEventListener('focus', function () {
   document.removeEventListener('keydown', onPopupEscPress);
-})
-
-// Валидация формыА
-
-userNameInput.addEventListener('invalid', function (evt) {
-  if (userNameInput.validity.tooShort) {
-    userNameInput.setCustomValidity('Имя должно состоять минимум из 2-х символов');
-  } else if (userNameInput.validity.tooLong) {
-    userNameInput.setCustomValidity('Имя не должно превышать 25-ти символов');
-  } else if (userNameInput.validity.valueMissing) {
-    userNameInput.setCustomValidity('Обязательное поле');
-  } else {
-    userNameInput.setCustomValidity('');
-  }
 });
 
 var getRandomItemFrom = function (array) { // получаем случайный элемент в переданом масиве
@@ -115,7 +101,6 @@ var showSetup = function (items) {
 
 showSetup(4);
 
-
 var setupWizard = document.querySelector('.setup-wizard');
 var inputWizardCoat = setup.querySelector('input[name="coat-color"]');
 var inputWizardEyes = setup.querySelector('input[name="eyes-color"]');
@@ -123,11 +108,6 @@ var inputWizardFireball = setup.querySelector('input[name="fireball-color"]');
 var wizardCoat = setupWizard.querySelector('.wizard-coat');
 var wizardEyes = setupWizard.querySelector('.wizard-eyes');
 var wizardFireball = setup.querySelector('.setup-fireball-wrap');
-
-// var getRandomFillForWizardPart = function(elem, array, input) {
-//   elem.style.fill = getRandomItemFrom(array);
-//   input.value = elem.style.fill;
-// };
 
 var getRandomFillForWizardPart = function (elem, color, input) {
   elem.style.fill = color;
