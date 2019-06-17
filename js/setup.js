@@ -4,11 +4,57 @@ var WIZARDS_NAMES = ['Иван', 'Хуан Себастьян', 'Мария', '�
 var WIZARDS_SURNAMES = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
 var WIZARDS_COAT_COLOR = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(56, 159, 117', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
 var WIZARDS_EYES_COLOR = ['black', 'red', 'blue', 'yellow', 'green'];
-var wizardSetup = document.querySelector('.setup');
+var ESC_KEYCODE = 27;
+var ENTER_KEYCODE = 13;
 var setupSimilar = document.querySelector('.setup-similar');
 var wizardsSimilarList = document.querySelector('.setup-similar-list');
 var wizardsTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
+var setup = document.querySelector('.setup');
+var setupOpen = document.querySelector('.setup-open');
+var setupClose = setup.querySelector('.setup-close');
 var userNameInput = setup.querySelector('.setup-user-name');
+
+// Работа с окном диалога 
+
+var onPopupEscPress = function(evt) {
+  if (evt.keyCode === ESC_KEYCODE) {
+    closePopup();
+  }
+};
+
+var openPopup = function() {
+  setup.classList.remove('hidden');
+  document.addEventListener('keydown', onPopupEscPress);
+};
+
+var closePopup = function() {
+  setup.classList.add('hidden');
+  document.removeEventListener('keydown', onPopupEscPress);
+};
+
+setupOpen.addEventListener('click', function() {
+  openPopup();
+});
+
+setupOpen.addEventListener('keydown', function(evt) {
+  if (evt.keyCode === ENTER_KEYCODE) {
+    openPopup();
+  }
+});
+
+setupClose.addEventListener('click', function() {
+  closePopup();
+});
+
+setupClose.addEventListener('keydown', function(evt) {
+  if (evt.keyCode === ENTER_KEYCODE) {
+    closePopup();
+  }
+});
+
+userNameInput.addEventListener('focus', function() {
+  document.removeEventListener('keydown', onPopupEscPress);
+})
 
 // Валидация формы
 
@@ -62,9 +108,8 @@ var renderWizards = function (wizards) { // Вставка темплейтов 
 };
 
 var showSetup = function (items) {
-  wizardSetup.classList.remove('hidden');
-  setupSimilar.classList.remove('hidden');
   renderWizards(generateWizards(items));
+  setupSimilar.classList.remove('hidden');
 };
 
 showSetup(4);
