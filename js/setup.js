@@ -8,6 +8,21 @@ var wizardSetup = document.querySelector('.setup');
 var setupSimilar = document.querySelector('.setup-similar');
 var wizardsSimilarList = document.querySelector('.setup-similar-list');
 var wizardsTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
+var userNameInput = setup.querySelector('.setup-user-name');
+
+// Валидация формы
+
+userNameInput.addEventListener('invalid', function (evt) {
+  if (userNameInput.validity.tooShort) {
+    userNameInput.setCustomValidity('Имя должно состоять минимум из 2-х символов');
+  } else if (userNameInput.validity.tooLong) {
+    userNameInput.setCustomValidity('Имя не должно превышать 25-ти символов');
+  } else if (userNameInput.validity.valueMissing) {
+    userNameInput.setCustomValidity('Обязательное поле');
+  } else {
+    userNameInput.setCustomValidity('');
+  }
+});
 
 var getRandomItemFrom = function (array) { // получаем случайный элемент в переданом масиве
   return array[Math.floor(Math.random() * array.length)];
