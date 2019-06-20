@@ -14,6 +14,8 @@ var setup = document.querySelector('.setup');
 var setupOpen = document.querySelector('.setup-open');
 var setupClose = setup.querySelector('.setup-close');
 var userNameInput = setup.querySelector('.setup-user-name');
+var setupTop;
+var setupLeft;
 
 // Работа с окном диалога
 
@@ -26,11 +28,15 @@ var onPopupEscPress = function (evt) {
 var openPopup = function () {
   setup.classList.remove('hidden');
   document.addEventListener('keydown', onPopupEscPress);
+  setupTop = setup.offsetTop;
+  setupLeft = setup.offsetLeft;
 };
 
 var closePopup = function () {
   setup.classList.add('hidden');
   document.removeEventListener('keydown', onPopupEscPress);
+  setup.style.top = setupTop + 'px';
+  setup.style.left = setupLeft + 'px';
 };
 
 setupOpen.addEventListener('click', function () {
