@@ -74,7 +74,7 @@
     var fragment = document.createDocumentFragment();
 
     for (var i = 0; i < WIZARDS_COUNT; i++) {
-      fragment.appendChild(createWizzardFromTemplate(wizards[i]));
+      fragment.appendChild(createWizzardFromTemplate(getRandomItemFrom(wizards)));
     }
     wizardsSimilarList.appendChild(fragment);
 
