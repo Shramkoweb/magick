@@ -1,6 +1,6 @@
 'use strict';
 
-window.backend = (function () {
+(function () {
 
   var request = function (url, method, onSuccess, onError, data) {
     var xhrRequest = new XMLHttpRequest();
@@ -33,7 +33,7 @@ window.backend = (function () {
     }
   };
 
-  return {
+  window.backend = {
     load: function (onLoad, onError) {
       request('https://js.dump.academy/code-and-magick/data', 'GET', onLoad, onError);
     },
