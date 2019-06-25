@@ -13,6 +13,7 @@
   var setupOpen = document.querySelector('.setup-open');
   var setupClose = setup.querySelector('.setup-close');
   var userNameInput = setup.querySelector('.setup-user-name');
+  var form = setup.querySelector('.setup-wizard-form');
   var setupTop;
   var setupLeft;
 
@@ -81,27 +82,14 @@
     setupSimilar.classList.remove('hidden');
   };
 
-  window.backend.load(renderWizards, window.backend.error);
+  window.backend.load(renderWizards, window.error);
 
-
-  var form = setup.querySelector('.setup-wizard-form');
   var formSuccessLoad = function () {
     setup.classList.add('hidden');
   };
 
-  var formErrorLoad = function (errorMessage) {
-    var node = document.createElement('p');
-    node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
-    node.style.position = 'absolute';
-    node.style.left = 0;
-    node.style.right = 0;
-    node.style.fontSize = '30px';
-
-    node.textContent = errorMessage;
-    document.body.insertAdjacentElement('afterbegin', node);
-  };
   form.addEventListener('submit', function (evt) {
-    window.backend.save(new FormData(form), formSuccessLoad, formErrorLoad);
+    window.backend.save(new FormData(form), formSuccessLoad, window.error);
     evt.preventDefault();
   });
 
