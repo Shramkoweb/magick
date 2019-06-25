@@ -4,9 +4,7 @@
 
   var request = function (url, method, onSuccess, onError, data) {
     var xhrRequest = new XMLHttpRequest();
-
     xhrRequest.responseType = 'json';
-
     xhrRequest.addEventListener('load', function () {
       if (xhrRequest.status === 200) {
         onSuccess(xhrRequest.response);

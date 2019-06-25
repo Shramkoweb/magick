@@ -5,7 +5,6 @@
   var WIZARDS_EYES_COLOR = ['black', 'red', 'blue', 'yellow', 'green'];
   var WIZARDS_FIREBALL_COLOR = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
   var WIZARDS_COUNT = 4;
-
   var setupSimilar = document.querySelector('.setup-similar');
   var wizardsSimilarList = document.querySelector('.setup-similar-list');
   var wizardsTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
@@ -14,10 +13,15 @@
   var setupClose = setup.querySelector('.setup-close');
   var userNameInput = setup.querySelector('.setup-user-name');
   var form = setup.querySelector('.setup-wizard-form');
+  var setupWizard = document.querySelector('.setup-wizard');
+  var inputWizardCoat = setup.querySelector('input[name="coat-color"]');
+  var inputWizardEyes = setup.querySelector('input[name="eyes-color"]');
+  var inputWizardFireball = setup.querySelector('input[name="fireball-color"]');
+  var wizardCoat = setupWizard.querySelector('.wizard-coat');
+  var wizardEyes = setupWizard.querySelector('.wizard-eyes');
+  var wizardFireball = setup.querySelector('.setup-fireball-wrap');
   var setupTop;
   var setupLeft;
-
-  // Работа с окном диалога
 
   var onPopupEscPress = function (evt) {
     window.util.isEscEvent(evt, closePopup);
@@ -93,14 +97,6 @@
     evt.preventDefault();
   });
 
-  var setupWizard = document.querySelector('.setup-wizard');
-  var inputWizardCoat = setup.querySelector('input[name="coat-color"]');
-  var inputWizardEyes = setup.querySelector('input[name="eyes-color"]');
-  var inputWizardFireball = setup.querySelector('input[name="fireball-color"]');
-  var wizardCoat = setupWizard.querySelector('.wizard-coat');
-  var wizardEyes = setupWizard.querySelector('.wizard-eyes');
-  var wizardFireball = setup.querySelector('.setup-fireball-wrap');
-
   var getRandomFillForWizardPart = function (elem, color, input) {
     elem.style.fill = color;
     input.value = color;
@@ -122,5 +118,4 @@
   wizardFireball.addEventListener('click', function () {
     getRandomBackgroundForWizardPart(wizardFireball, getRandomItemFrom(WIZARDS_FIREBALL_COLOR), inputWizardFireball);
   });
-
 })();
