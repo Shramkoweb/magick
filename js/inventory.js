@@ -1,7 +1,6 @@
 'use strict';
 
 (function () {
-
   var artifact = document.querySelector('.setup-artifacts-cell').firstElementChild;
 
   artifact.addEventListener('mousedown', function (evt) {

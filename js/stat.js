@@ -76,5 +76,4 @@
       renderText(ctx, names[i], horizontalOffset, CLOUD_BOTTOM);
     }
   };
-
 })();
